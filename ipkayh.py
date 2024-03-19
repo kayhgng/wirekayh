@@ -90,8 +90,10 @@ if __name__ == "__main__":
     print("------------------------------------------------------")
     print("Yongge Github project  ：github.com/yonggekkk")
     print("KayH GNG Github Project : github.com/kayhgng")
-    print("https://raw.githubusercontent.com/MiSaturo/WarpScanner/main/point/endip.sh --> Converted to python by KayH GNG --> """)
-    print("The script supports WARP preferred IP and WARP configuration file generation, thanks to CF netizens for development")
+    print("""https://raw.githubusercontent.com/MiSaturo/WarpScanner/main/point/endip.sh --> 
+          Converted to python by KayH GNG -->
+            https://raw.githubusercontent.com/kayhgng/ipcleanwarp/main/ipkayh.py """)
+    print("The script supports WARP preferred IP and WARP configuration file generation, thanks to CF and KayH GNG  for development")
     print("------------------------------------------------------")
     print()
     print("1. WARP-V4V6 preferred peer IP")
