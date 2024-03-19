@@ -2,12 +2,11 @@ import subprocess
 import platform
 import random
 import os
-
-import resource
+import resource  
 
 def endipresult():
     """Function to handle the final IP result"""
-    resource.setrlimit(resource.RLIMIT_NOFILE, (102400, 102400))
+    resource.setrlimit(resource.RLIMIT_NOFILE, (102400, 102400))  
     subprocess.run(['chmod', '+x', 'warpendpoint'])
     subprocess.run(['./warpendpoint'])
     subprocess.run(['clear'])
@@ -15,6 +14,7 @@ def endipresult():
     os.remove("ip.txt")
     os.remove("warpendpoint")
     exit()
+
 
 
 def get_cpu_architecture():
