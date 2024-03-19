@@ -5,6 +5,10 @@ import os
 import resource  
 
 def endipresult():
+    subprocess.run(['bash', '-c', 'ulimit -n 102400'])
+
+
+def endipresult():
     """Function to handle the final IP result"""
     resource.setrlimit(resource.RLIMIT_NOFILE, (102400, 102400))  
     subprocess.run(['chmod', '+x', 'warpendpoint'])
