@@ -3,6 +3,20 @@ import platform
 import random
 import os
 
+import resource
+
+def endipresult():
+    """Function to handle the final IP result"""
+    resource.setrlimit(resource.RLIMIT_NOFILE, (102400, 102400))
+    subprocess.run(['chmod', '+x', 'warpendpoint'])
+    subprocess.run(['./warpendpoint'])
+    subprocess.run(['clear'])
+    subprocess.run(['awk', '-F,', '$3!="timeout ms" {print} ', 'result.csv', '|', 'sort', '-t,', '-nk2', '-nk3', '|', 'uniq', '|', 'head', '-100', '|', 'awk', '-F,', '{print "endpoint "$1" Packet loss rate "$2" average latency "$3}'])
+    os.remove("ip.txt")
+    os.remove("warpendpoint")
+    exit()
+
+
 def get_cpu_architecture():
     """Get the CPU architecture of the current system."""
     arch = platform.machine()
