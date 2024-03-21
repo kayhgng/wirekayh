@@ -28,6 +28,6 @@ cd wirekayh
 
 dos2unix WiregaurdWarpmaker.sh
 
-./WiregaurdWarpmaker.sh
+bash WiregaurdWarpmaker.sh
 ```
 
