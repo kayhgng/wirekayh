@@ -15,6 +15,7 @@
 بهتر است که دی ان اس یا فیلترشکنتون رو روشن کنید چون ممکنه باگ بخورید مراحل نصب در ترموکس هم به این صورت هست.
 
 
+```
 apt update
 
 apt upgrade
@@ -28,5 +29,5 @@ cd wirekayh
 dos2unix WiregaurdWarpmaker.sh
 
 ./WiregaurdWarpmaker.sh
-
+```
 
