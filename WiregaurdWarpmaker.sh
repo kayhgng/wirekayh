@@ -244,18 +244,24 @@ exit
 fi
 }
 acwarpgo(){
-echo
-echo "1.Ye Account Wiregaurd Warp Besaz"
-read -p "Please select: " menu
-if [ "$menu" == "1" ];then
-warpgoac && warpgoconfig && warpgoshow
-elif [ "$menu" == "2" ];then
-warpgoplus && warpgoconfig && warpgoshow
-elif [ "$menu" == "3" ];then
-warpgoteams && warpgoconfig && warpgoshow
-else 
-exit
-fi
+    echo
+    echo "1.Ye Account Wiregaurd Warp Besaz"
+    read -p "Please select: " menu
+    if [ "$menu" == "1" ]; then
+        warpgoac
+        warpgoconfig
+        warpgoshow
+    elif [ "$menu" == "2" ]; then
+        warpgoplus
+        warpgoconfig
+        warpgoshow
+    elif [ "$menu" == "3" ]; then
+        warpgoteams
+        warpgoconfig
+        warpgoshow
+    else
+        exit
+    fi
 }
 echo "------------------------------------------------ ------"
 echo "Yongge Github project: github.com/yonggekkk"
@@ -265,11 +271,11 @@ echo "1. Yek Account Warp-go baram besaz"
 echo "0. exit"
 read -p "Please select: " menu
 if [ "$menu" == "1" ]; then
-acwarpgo
+    acwarpgo
 elif [ "$menu" == "3" ]; then
-acwarpapi
+    acwarpapi
 elif [ "$menu" == "2" ]; then
-acwgcf
+    acwgcf
 else
-exit
+    exit
 fi
