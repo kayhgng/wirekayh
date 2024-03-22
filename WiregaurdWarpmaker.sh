@@ -1,4 +1,3 @@
-#!/bin/bash
 case "$(uname -m)" in
 	x86_64 | x64 | amd64 )
 	cpu=amd64
