@@ -1,22 +1,23 @@
+#!/bin/bash
 case "$(uname -m)" in
 	x86_64 | x64 | amd64 )
 	cpu=amd64
 	;;
 	i386 | i686 )
-        cpu=386
+	cpu=386
 	;;
 	armv8 | armv8l | arm64 | aarch64 )
-        cpu=arm64
+	cpu=arm64
 	;;
 	armv7l )
-        cpu=arm
+	cpu=arm
 	;;
 	* )
 	echo "The current architecture is $(uname -m), which is not supported yet"
 	exit
 	;;
 esac
-( [ ! -f /tmp/pkgupdate ] && $(type -P yum || type -P apt) update && touch /tmp/pkgupdate ) 2> /dev/null >/dev/null
+[ ! -f /tmp/pkgupdate ] && $(type -P yum || type -P apt) update && touch /tmp/pkgupdate 2> /dev/null >/dev/null
 $(type -P yum || type -P apt) install -y qrencode 2> /dev/null | grep -v "already installed" >/dev/null
 rmrf(){
 rm -rf wgcf-account.toml wgcf-profile.conf warpgo.conf sbwarp.json warp-go warp.conf wgcf warp-api-wg.txt warpapi
@@ -263,12 +264,12 @@ echo "------------------------------------------------ ------"
 echo "1. Yek Account Warp-go baram besaz"
 echo "0. exit"
 read -p "Please select: " menu
-if [ "$menu" == "1" ];then
+if [ "$menu" == "1" ]; then
 acwarpgo
-elif [ "$menu" == "3" ];then
+elif [ "$menu" == "3" ]; then
 acwarpapi
-elif [ "$menu" == "2" ];then
+elif [ "$menu" == "2" ]; then
 acwgcf
-else 
+else
 exit
 fi
