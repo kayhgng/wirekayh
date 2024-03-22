@@ -1,4 +1,5 @@
 #!/bin/bash
+export LANG=en_US.UTF-8
 case "$(uname -m)" in
 	x86_64 | x64 | amd64 )
 	cpu=amd64
