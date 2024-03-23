@@ -1,24 +1,23 @@
 #!/bin/bash
-export LANG=en_US.UTF-8
 case "$(uname -m)" in
 	x86_64 | x64 | amd64 )
 	cpu=amd64
 	;;
 	i386 | i686 )
-	cpu=386
+        cpu=386
 	;;
 	armv8 | armv8l | arm64 | aarch64 )
-	cpu=arm64
+        cpu=arm64
 	;;
 	armv7l )
-	cpu=arm
+        cpu=arm
 	;;
 	* )
 	echo "The current architecture is $(uname -m), which is not supported yet"
 	exit
 	;;
 esac
-[ ! -f /tmp/pkgupdate ] && $(type -P yum || type -P apt) update && touch /tmp/pkgupdate 2> /dev/null >/dev/null
+( [ ! -f /tmp/pkgupdate ] && $(type -P yum || type -P apt) update && touch /tmp/pkgupdate ) 2> /dev/null >/dev/null
 $(type -P yum || type -P apt) install -y qrencode 2> /dev/null | grep -v "already installed" >/dev/null
 rmrf(){
 rm -rf wgcf-account.toml wgcf-profile.conf warpgo.conf sbwarp.json warp-go warp.conf wgcf warp-api-wg.txt warpapi
@@ -28,41 +27,41 @@ rm -rf wgcf-account.toml wgcf-profile.conf warpgo.conf sbwarp.json warp-go warp.
 #echo "$(cat /usr/local/bin/sbwarp.json | python3 -mjson.tool)"
 
 acwarpapi(){
-    echo "Download the warp api registration program..."
-    curl -L -o warpapi -# --retry 2 https://raw.githubusercontent.com/MiSaturo/WarpScanner/main/point/cpu1/$cpu
-    chmod +x warpapi
-    output=$(./warpapi)
-    if ./warpapi 2>&1 | grep -q "connection refused"; then
-        echo "申请warp api普通账户失败，请尝试使用warp-go方式进行注册" && exit
-    fi
-    private_key=$(echo "$output" | awk -F'=' '/^PrivateKey/ {print $2}')
-    v6=$(echo "$output" | awk -F'= ' '/^v6/ {print $2}')
-    res=$(echo "$output" | awk -F'= ' '/^reserved/ {print $2}' | tr -d '[:space:]')
-    cat > warp-api-wg.txt <<EOF
-    [Interface]
-    PrivateKey = $private_key
-    Address = 172.16.0.2/32, $v6/128
-    DNS = 1.1.1.1
-    MTU = 1280
-    [Peer]
-    PublicKey = bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=
-    AllowedIPs = 0.0.0.0/0, ::/0
-    Endpoint = 162.159.193.10:2408
-    EOF
-    clear
-    echo
-    echo "Warp account Ba Movafaghiat Sakhte shod!" && sleep 3
-    echo
-    echo "reserved value：$res" && sleep 2
-    echo
-    echo "warp-wireguard (api) Account shoma be in sorat ast" && sleep 2
-    cat warp-api-wg.txt
-    echo
-    sleep 2
-    qrencode -t ansiutf8 < warp-api-wg.txt 2>/dev/null
-    echo
-    note
-    rmrf
+echo "Download the warp api registration program..."
+curl -L -o warpapi -# --retry 2 https://raw.githubusercontent.com/MiSaturo/WarpScanner/main/point/cpu1/$cpu
+chmod +x warpapi
+output=$(./warpapi)
+if ./warpapi 2>&1 | grep -q "connection refused"; then
+echo "申请warp api普通账户失败，请尝试使用warp-go方式进行注册" && exit
+fi
+private_key=$(echo "$output" | awk -F ': ' '/private_key/{print $2}')
+v6=$(echo "$output" | awk -F ': ' '/v6/{print $2}')
+res=$(echo "$output" | awk -F ': ' '/reserved/{print $2}' | tr -d '[:space:]')
+cat > warp-api-wg.txt <<EOF
+[Interface]
+PrivateKey = $private_key
+Address = 172.16.0.2/32, $v6/128
+DNS = 1.1.1.1
+MTU = 1280
+[Peer]
+PublicKey = bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=
+AllowedIPs = 0.0.0.0/0, ::/0
+Endpoint = 162.159.193.10:2408
+EOF
+clear
+echo
+echo "Warp account Ba Movafaghiat Sakhte shod!" && sleep 3
+echo
+echo "reserved value：$res" && sleep 2
+echo
+echo "warp-wireguard (api) Account shoma be in sorat ast" && sleep 2
+cat warp-api-wg.txt
+echo
+sleep 2
+qrencode -t ansiutf8 < warp-api-wg.txt 2>/dev/null
+echo
+note
+rmrf
 }
 wgcfreg(){
 echo "Download the warp-wgcf registration program..."
@@ -245,24 +244,18 @@ exit
 fi
 }
 acwarpgo(){
-    echo
-    echo "1.Ye Account Wiregaurd Warp Besaz"
-    read -p "Please select: " menu
-    if [ "$menu" == "1" ]; then
-        warpgoac
-        warpgoconfig
-        warpgoshow
-    elif [ "$menu" == "2" ]; then
-        warpgoplus
-        warpgoconfig
-        warpgoshow
-    elif [ "$menu" == "3" ]; then
-        warpgoteams
-        warpgoconfig
-        warpgoshow
-    else
-        exit
-    fi
+echo
+echo "1.Ye Account Wiregaurd Warp Besaz"
+read -p "Please select: " menu
+if [ "$menu" == "1" ];then
+warpgoac && warpgoconfig && warpgoshow
+elif [ "$menu" == "2" ];then
+warpgoplus && warpgoconfig && warpgoshow
+elif [ "$menu" == "3" ];then
+warpgoteams && warpgoconfig && warpgoshow
+else 
+exit
+fi
 }
 echo "------------------------------------------------ ------"
 echo "Yongge Github project: github.com/yonggekkk"
@@ -271,12 +264,12 @@ echo "------------------------------------------------ ------"
 echo "1. Yek Account Warp-go baram besaz"
 echo "0. exit"
 read -p "Please select: " menu
-if [ "$menu" == "1" ]; then
-    acwarpgo
-elif [ "$menu" == "3" ]; then
-    acwarpapi
-elif [ "$menu" == "2" ]; then
-    acwgcf
-else
-    exit
+if [ "$menu" == "1" ];then
+acwarpgo
+elif [ "$menu" == "3" ];then
+acwarpapi
+elif [ "$menu" == "2" ];then
+acwgcf
+else 
+exit
 fi
