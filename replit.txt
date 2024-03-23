@@ -1,0 +1,6 @@
+run = "bash wiregaurdkayh.sh"
+
+entrypoint = "wiregaurdkayh.sh"
+
+[nix]
+channel = "stable-21_11"
